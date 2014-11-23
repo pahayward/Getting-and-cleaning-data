@@ -1,6 +1,9 @@
 
 run_analysis <- function() 
-{  
+{ 
+  # Load library ?
+  library(dplyr)
+  
   # This script should be copied to/run from "UCI HAR Dataset" directory 
   
   ####################################################################
@@ -77,11 +80,9 @@ run_analysis <- function()
   ##############################################################################
   message("Generate average(mean) for EACH subject and for EACH activity")
   
-  # Todo: 
-  # Average of EACH variable for EACH subject and for EACH activity
   
-  final_result <- ddply(.data =  subset_meanstd, .variables=c("Activity", "Subject"), mean=mean(), na.rm=TRUE )
-  
+  final_result <- aggregate(subset_meanstd, by = list(subset_meanstd$Activity,subset_meanstd$Subject), mean)
+  write.table(final_result, "final.txt", row.name=FALSE)
 
 }
 
