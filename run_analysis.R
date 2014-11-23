@@ -80,7 +80,7 @@ run_analysis <- function()
   ##############################################################################
   message("Generate average(mean) for EACH subject and for EACH activity")
   
-  
+  ss<- arrange(subset_meanstd, Activity, Subject)
   final_result <- aggregate(subset_meanstd, by = list(subset_meanstd$Activity,subset_meanstd$Subject), mean)
   write.table(final_result, "final.txt", row.name=FALSE)
 
